@@ -21,7 +21,7 @@ public class RandomUtils {
     public String inputAddress = faker.address().fullAddress();
     public String inputAddress2 = faker.address().fullAddress();
     public String inputCity = getCity();
-    public String inputState = getStateByCity(inputCity);
+    public String inputState = getState(inputCity);
     public String findColor = "border-color";
     public String colorName = "rgb(220, 53, 69)";
 
@@ -43,22 +43,22 @@ public class RandomUtils {
     public String getSubject() {
         return faker.options().option("Maths", "Arts", "English", "Biology", "Hindi", "Commerce");
     }
-
-    public String getCity() {
-        return faker.options().option("Delhi", "Agra", "Karnal", "Gurgaon", "Lucknow", "Panipat", "Jaipur", "Jaiselmer");
-    }
-
-    public String getStateByCity(String value) {
+    public String getState(String value) {
         HashMap<String, String> cityAndState = new HashMap<>();
         cityAndState.put("Delhi", "NCR");
         cityAndState.put("Gurgaon", "NCR");
+        cityAndState.put("Noida", "NCR");
         cityAndState.put("Agra", "Uttar Pradesh");
         cityAndState.put("Lucknow", "Uttar Pradesh");
+        cityAndState.put("Merrut", "Uttar Pradesh");
         cityAndState.put("Karnal", "Haryana");
         cityAndState.put("Panipat", "Haryana");
         cityAndState.put("Jaipur", "Rajasthan");
         cityAndState.put("Jaiselmer", "Rajasthan");
         return cityAndState.get(value);
+    }
+    public String getCity() {
+        return faker.options().option("Delhi", "Agra", "Karnal", "Gurgaon", "Lucknow", "Panipat", "Jaipur", "Jaiselmer");
     }
 }
 

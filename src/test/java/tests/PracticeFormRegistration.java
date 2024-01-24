@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.SelectPage;
 import pages.components.TestBase;
-import Utils.RandomUtils;
+import pages.components.TestRandomData;
 
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,57 +13,56 @@ import static com.codeborne.selenide.Condition.visible;
 public class PracticeFormRegistration extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
-    RandomUtils randomUtils = new RandomUtils();
+    TestRandomData testRandomData = new TestRandomData();
     SelectPage selectPage = new SelectPage();
 
     @Test
     void succesfulRegistrationWithAllData() {
 
         registrationPage.openPage()
-                .setFirstName(randomUtils.firstName)
-                .setLastName(randomUtils.lastName)
-                .setEmail(randomUtils.inputEmail)
-                .setGender(randomUtils.inputGender)
-                .setPhoneNumber(randomUtils.inputPhone)
-                .setDateOfBirth(randomUtils.randomDay, randomUtils.randomMonth, randomUtils.randomYear)
-                .setSubjects(randomUtils.inputSubject)
-                .setHobbies(randomUtils.inputHobby)
-                .uploadPicture(randomUtils.pictureName)
-                .setCurrentAddress(randomUtils.inputAddress)
-                .setState(randomUtils.inputState)
-                .setCity(randomUtils.inputCity)
+                .setFirstName(testRandomData.firstName)
+                .setLastName(testRandomData.lastName)
+                .setEmail(testRandomData.inputEmail)
+                .setGender(testRandomData.inputGender)
+                .setPhoneNumber(testRandomData.inputPhone)
+                .setDateOfBirth(testRandomData.dayRandom, testRandomData.randomMonth, testRandomData.randomYear)
+                .setSubjects(testRandomData.inputSubject)
+                .setHobbies(testRandomData.inputHobby)
+                .uploadPicture(testRandomData.pictureName)
+                .setCurrentAddress(testRandomData.inputAddress)
+                .setState(testRandomData.inputState)
+                .setCity(testRandomData.inputCity)
                 .submitButton();
         selectPage.modalOpenCheck(visible)
-                .tableCheck("Student Name", randomUtils.firstName)
-                .tableCheck("Student Name", randomUtils.lastName)
-                .tableCheck("Student Email", randomUtils.inputEmail)
-                .tableCheck("Gender", randomUtils.inputGender)
-                .tableCheck("Mobile", randomUtils.inputPhone)
-                .tableCheck("Date of Birth", randomUtils.randomDay + " " + randomUtils.randomMonth + "," + randomUtils.randomYear)
-                .tableCheck("Subjects", randomUtils.inputSubject)
-                .tableCheck("Hobbies", randomUtils.inputHobby)
-                .tableCheck("Picture", randomUtils.pictureName)
-                .tableCheck("Address", randomUtils.inputAddress)
-                .tableCheck("State and City", randomUtils.inputState)
-                .tableCheck("State and City", randomUtils.inputCity);
+                .tableCheck("Student Name", testRandomData.firstName)
+                .tableCheck("Student Name", testRandomData.lastName)
+                .tableCheck("Student Email", testRandomData.inputEmail)
+                .tableCheck("Gender", testRandomData.inputGender)
+                .tableCheck("Mobile", testRandomData.inputPhone)
+                .tableCheck("Date of Birth", testRandomData.setRandomDay + " " + testRandomData.randomMonth + "," + testRandomData.randomYear)
+                .tableCheck("Subjects", testRandomData.inputSubject)
+                .tableCheck("Hobbies", testRandomData.inputHobby)
+                .tableCheck("Picture", testRandomData.pictureName)
+                .tableCheck("Address", testRandomData.inputAddress)
+                .tableCheck("State and City", testRandomData.inputState)
+                .tableCheck("State and City", testRandomData.inputCity);
     }
 
     @Test
     void RegistrationWithMinimalInformation() {
 
         registrationPage.openPage()
-                .setFirstName(randomUtils.firstName)
-                .setLastName(randomUtils.lastName)
-                .setGender(randomUtils.inputGender)
-                .setPhoneNumber(randomUtils.inputPhone)
-                .setDateOfBirth(randomUtils.randomDay, randomUtils.randomMonth, randomUtils.randomYear)
+                .setFirstName(testRandomData.firstName)
+                .setLastName(testRandomData.lastName)
+                .setGender(testRandomData.inputGender)
+                .setPhoneNumber(testRandomData.inputPhone)
+                .setDateOfBirth(testRandomData.dayRandom, testRandomData.randomMonth, testRandomData.randomYear)
                 .submitButton();
         selectPage.modalOpenCheck(visible)
-                .tableCheck("Student Name", randomUtils.firstName + " " + randomUtils.lastName)
-                .tableCheck("Gender", randomUtils.inputGender)
-                .tableCheck("Mobile", randomUtils.inputPhone)
-                .tableCheck("Date of Birth", randomUtils.randomDay + " " + randomUtils.randomMonth + "," + randomUtils.randomYear);
-
+                .tableCheck("Student Name", testRandomData.firstName + " " + testRandomData.lastName)
+                .tableCheck("Gender", testRandomData.inputGender)
+                .tableCheck("Mobile", testRandomData.inputPhone)
+                .tableCheck("Date of Birth", testRandomData.setRandomDay + " " + testRandomData.randomMonth + "," + testRandomData.randomYear);
 
 
     }
@@ -73,7 +72,7 @@ public class PracticeFormRegistration extends TestBase {
     void RegistrationEmptyInformation() {
         registrationPage.openPage()
                 .submitButton()
-                .colorCheck(randomUtils.findColor, randomUtils.colorName);
+                .colorCheck(testRandomData.findColor, testRandomData.colorName);
         selectPage.modalOpenCheck(hidden);
     }
 }

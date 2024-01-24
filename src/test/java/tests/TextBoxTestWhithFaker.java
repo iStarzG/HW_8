@@ -1,29 +1,29 @@
 package tests;
 
-
-import Utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxRegistrationPage;
 import pages.TextBoxSelectPage;
 import pages.components.TestBase;
+import pages.components.TestRandomData;
 
 public class TextBoxTestWhithFaker extends TestBase {
 
     TextBoxRegistrationPage textBoxPage = new TextBoxRegistrationPage();
     TextBoxSelectPage textBoxSelect = new TextBoxSelectPage();
-    RandomUtils randomUtils = new RandomUtils();
+    TestRandomData testRandomData = new TestRandomData();
+
     @Test
-    void textBoxWithPages () {
+    void textBoxWithPages() {
         textBoxPage.openPage()
-                .setFirstName(randomUtils.firstName)
-                .setEmailName(randomUtils.inputEmail)
-                .setCurrentAdress(randomUtils.inputAddress)
-                .setPermanentAdress(randomUtils.inputAddress2)
+                .setFirstName(testRandomData.firstName)
+                .setEmailName(testRandomData.inputEmail)
+                .setCurrentAdress(testRandomData.inputAddress)
+                .setPermanentAdress(testRandomData.inputAddress2)
                 .submitClick();
-        textBoxSelect.nameCheck(randomUtils.firstName)
-                .emailCheck(randomUtils.inputEmail)
-                .currentAdressCheck(randomUtils.inputAddress)
-                .permanentAdressCheck(randomUtils.inputAddress2);
+        textBoxSelect.nameCheck(testRandomData.firstName)
+                .emailCheck(testRandomData.inputEmail)
+                .currentAdressCheck(testRandomData.inputAddress)
+                .permanentAdressCheck(testRandomData.inputAddress2);
 
     }
 }
